@@ -1,5 +1,6 @@
 var mqtt = require('mqtt'), url = require('url');
 var express = require('express');
+var http = require("http");//for wakeup server every 20 min
 var app = express();
 // Parse 
 var mqtt_url = url.parse('mqtt://m21.cloudmqtt.com:12307');
@@ -108,6 +109,11 @@ app.get('/', function (req, res) {
 
   res.send(mess);
 });
+
+//wakeup server every 20 min
+setInterval(function () {
+    http.get("https://mysoft.herokuapp.com/");
+}, 1200000); // every 20 minutes
 
 app.listen(process.env.PORT || 3000, function () {
   console.log('Adress:localhost:3000');

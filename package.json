@@ -19,6 +19,7 @@
   "homepage": "https://github.com/planer-pro/weather_server#readme",
   "dependencies": {
     "express": "^4.15.3",
+    "http": "0.0.0",
     "mqtt": "^2.9.0"
   }
 }
