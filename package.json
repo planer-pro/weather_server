@@ -1,11 +1,23 @@
 {
-  "name": "serv",
+  "name": "weather_server",
   "version": "1.0.0",
-  "description": "",
+  "description": "weather server",
   "main": "serv.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Planer",
-  "license": "ISC"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/planer-pro/weather_server.git"
+  },
+  "author": "planer-pro",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/planer-pro/weather_server/issues"
+  },
+  "homepage": "https://github.com/planer-pro/weather_server#readme",
+  "dependencies": {
+    "express": "^4.15.3",
+    "mqtt": "^2.9.0"
+  }
 }
