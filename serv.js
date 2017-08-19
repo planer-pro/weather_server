@@ -83,6 +83,7 @@ app.get('/', function (req, res) {
         <!DOCTYPE html>
         <html>
          <head>
+          <meta http-equiv="refresh" content="5">
           <meta charset='utf-8'>
           <title>MQTT Controller</title>
          </head>
