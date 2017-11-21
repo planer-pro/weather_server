@@ -1,10 +1,10 @@
 var mqtt = require('mqtt'), url = require('url');
 var express = require('express');
-var http = require("http");//for wakeup server every 20 min
+var http = require("http");
 var app = express();
 // Parse 
-var mqtt_url = url.parse('mqtt://m21.cloudmqtt.com:12307');
-var auth = ['ilgudqkb', 'OI7RNW8-uu2U'];
+var mqtt_url = url.parse('mqtt://m14.cloudmqtt.com:13682');
+var auth = ['oixflctz', '-AgegtRMpwhG'];
 var url = "mqtt://" + mqtt_url.host;
 var datatemp = [];
 var datahum = [];
@@ -18,16 +18,11 @@ var options = {
   password: auth[1],
 };
 
-// Create a client connection
 var client = mqtt.connect(url, options);
 
 client.on('connect', () => {
   client.subscribe('#')
   client.publish('outdoor/sensors/bme280_getState', '1')
-  /*client.subscribe('outdoor/sensors/bme280_temp')
-  client.subscribe('outdoor/sensors/bme280_hum')
-  client.subscribe('outdoor/sensors/bme280_press')
-  client.subscribe('outdoor/sensors/bme280_alt')*/
 });
 
 client.on('message', (topic, message) => {
@@ -72,10 +67,9 @@ client.on('message', (topic, message) => {
 })
 
 app.get('/', function (req, res) {
-  //if (!message) return;
   if (datatemp.length == 0 || datahum.length == 0 || datapress.length == 0
     || dataalt.length == 0) {
-    res.send('Oops, something does wrong)');
+    res.send('Oops, something goes wrong)');
     return;
   }
 
