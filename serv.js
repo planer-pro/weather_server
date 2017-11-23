@@ -1,4 +1,5 @@
-var mqtt = require('mqtt'), url = require('url');
+var mqtt = require('mqtt'),
+  url = require('url');
 var express = require('express');
 var http = require("http");
 var app = express();
@@ -67,8 +68,8 @@ client.on('message', (topic, message) => {
 })
 
 app.get('/', function (req, res) {
-  if (datatemp.length == 0 || datahum.length == 0 || datapress.length == 0
-    || dataalt.length == 0) {
+  if (datatemp.length == 0 || datahum.length == 0 || datapress.length == 0 ||
+    dataalt.length == 0) {
     res.send('Oops, something goes wrong)');
     return;
   }
@@ -89,6 +90,7 @@ app.get('/', function (req, res) {
   mess += 'Humidity: ' + datahum[datahum.length - 1].message + ' % <br>';
   mess += 'Pressure: ' + datapress[datapress.length - 1].message + ' hPa <br>';
   mess += 'Altitude: ' + dataalt[dataalt.length - 1].message + ' m <br>';
+  //-
 
   /* mess += `
          <form>
@@ -107,7 +109,7 @@ app.get('/', function (req, res) {
 
 //wakeup server every 20 min
 setInterval(function () {
-    http.get("https://mysoft.herokuapp.com/");
+  http.get("https://mysoft.herokuapp.com/");
 }, 1200000); // every 20 minutes
 
 app.listen(process.env.PORT || 3000, function () {
