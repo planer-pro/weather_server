@@ -90,9 +90,8 @@ app.get('/', function (req, res) {
   mess += 'Humidity: ' + datahum[datahum.length - 1].message + ' % <br>';
   mess += 'Pressure: ' + datapress[datapress.length - 1].message + ' hPa <br>';
   mess += 'Altitude: ' + dataalt[dataalt.length - 1].message + ' m <br>';
-  //-
 
-  /* mess += `
+  mess += `
          <form>
           <p>Введите температуру 0-100 градусов:</p>
           <p><input type='number' size='3' name='num' min='0' max='100' value='0'></p>
@@ -102,7 +101,7 @@ app.get('/', function (req, res) {
          </form>
         </body>
        </html>
-       `;*/
+       `
 
   res.send(mess);
 });
