@@ -1,8 +1,8 @@
 var app = new Vue({
     el: '#app',
     data: {
-        time: 30,
-        temperature: 25,
+        time: 35,
+        temperature: 125,
         humidity: 75,
         pressure: 990,
         altitude: 220
