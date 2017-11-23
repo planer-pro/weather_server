@@ -3,6 +3,8 @@ var http = require("http");
 var app = express();
 var mqtt = require('./mqtt-client');
 
+app.use(express.static('public'));
+
 app.get('/', function (req, res) {
   if (datatemp.length == 0 || datahum.length == 0 || datapress.length == 0 ||
     dataalt.length == 0) {
