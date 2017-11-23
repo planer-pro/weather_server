@@ -2,36 +2,75 @@
 
 
 <script>
-import { Bar } from "vue-chartjs";
+import { Line } from "vue-chartjs";
 // import Bar from "../node_modules/vue-chartjs/es/BaseCharts/Bar.js";
 
 export default {
-  extends: Bar,
+  extends: Line,
   mounted() {
     // Переопределение базового рендер метода с реальными данными.
-    this.renderChart({
-      labels: [
-        "January",
-        "February",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "August",
-        "September",
-        "October",
-        "November",
-        "December"
-      ],
-      datasets: [
-        {
-          label: "GitHub Commits",
-          backgroundColor: "#f87979",
-          data: [40, 20, 12, 39, 10, 40, 39, 80, 40, 20, 12, 11]
+    this.renderChart(
+      {
+        datasets: [
+          {
+            label: "Temp",
+            fill: false,
+            borderColor: "#f87979",
+            data: [
+              {
+                x: new Date(2017, 1, 1, 1),
+                y: 1
+              },
+              {
+                t: new Date(2017, 1, 1, 2),
+                y: -30
+              },
+              {
+                t: new Date(2017, 1, 1, 3),
+                y: 7
+              },
+              {
+                t: new Date(2017, 1, 2, 7),
+                y: 30
+              }
+            ]
+          },
+          {
+            label: "Hum",
+            fill: false,
+            borderColor: "#7979f8",
+            data: [
+              {
+                x: new Date(2017, 1, 1, 1),
+                y: 2
+              },
+              {
+                t: new Date(2017, 1, 1, 2),
+                y: 4
+              },
+              {
+                t: new Date(2017, 1, 1, 3),
+                y: 90
+              },
+              {
+                t: new Date(2017, 1, 2, 7),
+                y: 3
+              }
+            ]
+          }
+        ]
+      },
+      {
+        drawOnChartArea: false,
+        scales: {
+          xAxes: [
+            {
+              type: "time"
+            }
+          ]
         }
-      ]
-    });
+      }
+    );
   }
 };
 </script>
