@@ -3,16 +3,52 @@ var http = require("http");
 var app = express();
 var mqtt = require('./mqtt-client');
 
+//webpack live reload
+var webpack = require('webpack');
+var webpackConfig = require('./webpack.config');
+var compiler = webpack(webpackConfig);
+app.use(require("webpack-dev-middleware")(compiler, {
+  noInfo: true,
+  publicPath: webpackConfig.output.publicPath
+}));
+app.use(require("webpack-hot-middleware")(compiler, {
+  log: console.log,
+  path: '/__webpack_hmr',
+  heartbeat: 10 * 1000
+}));
+//------------
+
 app.use(express.static('public'));
 
-app.get('/', function (req, res) {
-  if (datatemp.length == 0 || datahum.length == 0 || datapress.length == 0 ||
-    dataalt.length == 0) {
-    res.send('Oops, something goes wrong)');
-    return;
+
+var history = {
+  temperature: [],
+  humidity: []
+};
+app.get('/api/history', function (req, res) {
+
+  history.temperature.push({
+    x: new Date(),
+    y: Math.random() * 100
+  });
+  history.humidity.push({
+    x: new Date(),
+    y: Math.random() * 100
+  });
+  res.json(history);
+});
+
+app.get('/api/meteo', function (req, res) {
+
+  var meteo = {
+    time: 5,
+    temperature: Math.round((Math.random() * 25)),
+    humidity: 7,
+    pressure: 99,
+    altitude: 22
   }
 
-  res.send(mess);
+  res.json(meteo);
 });
 
 //wakeup server every 20 min

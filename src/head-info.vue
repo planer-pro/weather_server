@@ -1,23 +1,38 @@
 <template lang='pug'>
   ul
-    li Time: {{time}}
-    li Temperature: {{temperature}} degrees
-    li Humidity: {{humidity}} %
-    li Pressure: {{pressure}} hPa
-    li Altitude: {{altitude}} m
+    li Time: {{meteo.time}}
+    li Temperature: {{meteo.temperature}} degrees
+    li Humidity: {{meteo.humidity}} %
+    li Pressure: {{meteo.pressure}} hPa
+    li Altitude: {{meteo.altitude}} m
 </template>
 
-
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
-      time: 35,
-      temperature: 125,
-      humidity: 75,
-      pressure: 990,
-      altitude: 220
+      meteo: {
+        time: 0,
+        temperature: 0,
+        humidity: 0,
+        pressure: 0,
+        altitude: 0
+      }
     };
+  },
+  mounted() {
+    setInterval(this.getInfo, 2000);
+    this.getInfo();
+  },
+  methods: {
+    getInfo() {
+      axios.get("/api/meteo").then(res => {
+        //console.log(res.data);
+        this.meteo = res.data;
+      });
+    }
   }
 };
 </script>

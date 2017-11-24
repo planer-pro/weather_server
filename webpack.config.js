@@ -3,6 +3,8 @@ var webpack = require('webpack')
 
 module.exports = {
   entry: [
+    //live reload
+    'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
     //app
     './src/client.js'
   ],
@@ -44,7 +46,11 @@ module.exports = {
       }
     ]
   },
-  plugins: [],
+  plugins: [
+    //live reload
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoEmitOnErrorsPlugin()
+  ],
   devServer: {
     historyApiFallback: true,
     noInfo: true

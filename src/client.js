@@ -1,11 +1,11 @@
 import HeadInfo from "./head-info"
-import Chart from "./chart"
+import MeteoChart from "./meteo-chart"
 
 var app = new Vue({
     el: '#app',
     data: {},
     components: {
         "head-info": HeadInfo,
-        "chart": Chart
+        "meteo-chart": MeteoChart
     }
 })
