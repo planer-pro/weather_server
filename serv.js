@@ -20,32 +20,34 @@ app.use(require("webpack-hot-middleware")(compiler, {
 
 app.use(express.static('public'));
 
-
 var history = {
   temperature: [],
   humidity: []
 };
+
 app.get('/api/history', function (req, res) {
 
   history.temperature.push({
     x: new Date(),
-    y: Math.random() * 100
+    y: mqtt.data.temp
   });
+
   history.humidity.push({
     x: new Date(),
-    y: Math.random() * 100
+    y: mqtt.data.hum
   });
+
   res.json(history);
 });
 
 app.get('/api/meteo', function (req, res) {
 
   var meteo = {
-    time: 5,
-    temperature: Math.round((Math.random() * 25)),
-    humidity: 7,
-    pressure: 99,
-    altitude: 22
+    time: new Date(),
+    temperature: mqtt.data.temp,
+    humidity: mqtt.data.hum,
+    pressure: mqtt.data.press,
+    altitude: mqtt.data.alt
   }
 
   res.json(meteo);

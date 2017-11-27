@@ -23,7 +23,7 @@ export default {
     };
   },
   mounted() {
-    setInterval(this.getInfo, 2000);
+    setInterval(this.getInfo, 1000);
     this.getInfo();
   },
   methods: {
