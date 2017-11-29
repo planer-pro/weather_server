@@ -5,8 +5,9 @@ for (let index = 0; index < 10; index++) {
 }
 
 console.log(dataTemp.length);
+console.log(dataTemp[dataTemp.length - 1]);
 
-dataTemp.forEach(element => {
+/*dataTemp.forEach(element => {
     console.log(dataTemp.shift());
     console.log(dataTemp);
-});
+});*/

@@ -21,21 +21,18 @@ app.use(require("webpack-hot-middleware")(compiler, {
 app.use(express.static('public'));
 
 var history = {
-  temperature: [],
-  humidity: []
+  temp: [],
+  hum: [],
+  press: [],
+  alt: []
 };
 
 app.get('/api/history', function (req, res) {
 
-  history.temperature.push({
-    x: new Date(),
-    y: mqtt.data.temp
-  });
-
-  history.humidity.push({
-    x: new Date(),
-    y: mqtt.data.hum
-  });
+  history.temp = mqtt.data.temp;
+  history.hum = mqtt.data.hum;
+  history.press = mqtt.data.press;
+  history.alt = mqtt.data.alt;
 
   res.json(history);
 });
@@ -43,11 +40,11 @@ app.get('/api/history', function (req, res) {
 app.get('/api/meteo', function (req, res) {
 
   var meteo = {
-    time: new Date(),
-    temperature: mqtt.data.temp,
-    humidity: mqtt.data.hum,
-    pressure: mqtt.data.press,
-    altitude: mqtt.data.alt
+    time: new Date().toTimeString(),
+    temperature: mqtt.curData.temp,
+    humidity: mqtt.curData.hum,
+    pressure: mqtt.curData.press,
+    altitude: mqtt.curData.alt
   }
 
   res.json(meteo);

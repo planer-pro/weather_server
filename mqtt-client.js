@@ -1,14 +1,21 @@
 var mqtt = require('mqtt');
 
 var mqtt_url = 'mqtt://m14.cloudmqtt.com';
-var mqtt_port = 13682;
-var auth = ['oixflctz', '-AgegtRMpwhG'];
+var mqtt_port = 19478;
+var auth = ['arqrndiv', 'DISLWUtOCYZ_'];
 
-var data = [];
+var data = {
+    temp: [],
+    hum: [],
+    press: [],
+    alt: []
+};
+
+var curData = [];
 
 var options = {
     port: mqtt_port,
-    clientId: 'my cool client',
+    clientId: 'my client',
     username: auth[0],
     password: auth[1],
 };
@@ -23,27 +30,55 @@ client.on('connect', () => {
     client.publish('outdoor/sensors/bme280_getState', '1')
 });
 
+var tempOld = "0";
+var humOld = "0";
+var pressOld = "0";
+var altOld = "0";
+
+function pushData(dir, message) {
+    var time = new Date();
+
+    if (dir == "temp") tempOld = message;
+    if (dir == "hum") humOld = message;
+    if (dir == "press") pressOld = message;
+    if (dir == "alt") altOld = message;
+
+    data.temp.push({ x: time, y: tempOld });
+    data.hum.push({ x: time, y: humOld });
+    data.press.push({ x: time, y: pressOld });
+    data.alt.push({ x: time, y: altOld });
+}
+
 client.on('message', (topic, message) => {
     switch (topic) {
         case 'outdoor/sensors/bme280_temp':
-            data.temp = "" + message
-            //console.log(data.temp)
+            curData.temp = "" + message;
+            pushData("temp", curData.temp);
+            //console.log(data);
             break;
 
         case 'outdoor/sensors/bme280_hum':
-            data.hum = "" + message
+            curData.hum = "" + message;
+            pushData("hum", curData.hum);
+            //console.log(data);
             break;
 
         case 'outdoor/sensors/bme280_press':
-            data.press = "" + message
+            curData.press = "" + message;
+            pushData("press", curData.press);
+            //console.log(data);
             break;
 
         case 'outdoor/sensors/bme280_alt':
-            data.alt = "" + message
+            curData.alt = "" + message;
+            pushData("alt", curData.alt);
+            //console.log(data);
             break;
     }
+    //console.log(data);
 })
 
 module.exports = {
-    data: data
+    data: data,
+    curData: curData
 }

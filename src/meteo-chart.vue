@@ -36,13 +36,25 @@ export default {
               label: "Temp",
               fill: false,
               borderColor: "#f87979",
-              data: res.data.temperature
+              data: res.data.temp
             },
             {
               label: "Hum",
               fill: false,
               borderColor: "#7979f8",
-              data: res.data.humidity
+              data: res.data.hum
+            },
+            {
+              label: "Press",
+              fill: false,
+              borderColor: "#797968",
+              data: res.data.press
+            },
+            {
+              label: "Alt",
+              fill: false,
+              borderColor: "#a9032f",
+              data: res.data.alt
             }
           ]
         };
