@@ -1,7 +1,7 @@
 
 <template lang="pug">
   div.chart
-    chart(:chart-data="datacollection")
+    chart(:chart-data="datacollection" :height="300" :width="1200")
 </template>
 
 <script>
@@ -20,7 +20,7 @@ export default {
   },
   mounted() {
     this.getHistory();
-    setInterval(this.getHistory, 4000);
+    setInterval(this.getHistory, 300000);//5min request
   },
   methods: {
     getHistory() {
@@ -30,25 +30,25 @@ export default {
             {
               label: "Temp",
               fill: false,
-              borderColor: "#f87979",
+              borderColor: '#EF5350',
               data: res.data.temp
             },
             {
               label: "Hum",
               fill: false,
-              borderColor: "#7979f8",
+              borderColor: '#536DFE',
               data: res.data.hum
             },
             {
               label: "Press",
               fill: false,
-              borderColor: "#797968",
+              borderColor: '#A5D6A7',
               data: res.data.press
             },
             {
               label: "Alt",
               fill: false,
-              borderColor: "#a9032f",
+              borderColor: '#FFF59D',
               data: res.data.alt
             }
           ]
