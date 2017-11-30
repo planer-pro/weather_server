@@ -19,17 +19,12 @@ export default {
     };
   },
   mounted() {
-    // console.log(this);
     this.getHistory();
-    setInterval(this.getHistory, 2000);
+    setInterval(this.getHistory, 4000);
   },
   methods: {
     getHistory() {
       axios.get("/api/history").then(res => {
-        // this.data.datasets[0].data = res.data.temperature;
-        // this.data.datasets[1].data = res.data.humidity;
-        // console.log(this._chart);
-
         this.datacollection = {
           datasets: [
             {
@@ -65,8 +60,5 @@ export default {
 </script>
 
 <style>
-.chart {
-  /* max-width: 80%; */
-  margin: 0 20px;
-}
+
 </style>

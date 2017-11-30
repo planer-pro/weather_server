@@ -1,13 +1,5 @@
-var dataTemp = [];
-
-for (let index = 0; index < 10; index++) {
-    dataTemp.push(index);
-}
-
-console.log(dataTemp.length);
-console.log(dataTemp[dataTemp.length - 1]);
-
-/*dataTemp.forEach(element => {
-    console.log(dataTemp.shift());
-    console.log(dataTemp);
-});*/
+var time1 = new Date();
+setTimeout(function () {
+    var time2 = new Date();
+    console.log(time2 - time1);
+}, 1000);

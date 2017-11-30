@@ -20,21 +20,9 @@ app.use(require("webpack-hot-middleware")(compiler, {
 
 app.use(express.static('public'));
 
-var history = {
-  temp: [],
-  hum: [],
-  press: [],
-  alt: []
-};
-
 app.get('/api/history', function (req, res) {
 
-  history.temp = mqtt.data.temp;
-  history.hum = mqtt.data.hum;
-  history.press = mqtt.data.press;
-  history.alt = mqtt.data.alt;
-
-  res.json(history);
+  res.json(mqtt.data);
 });
 
 app.get('/api/meteo', function (req, res) {

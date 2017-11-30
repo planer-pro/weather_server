@@ -15,7 +15,7 @@ var curData = [];
 
 var options = {
     port: mqtt_port,
-    clientId: 'my client',
+    clientId: 'serv',
     username: auth[0],
     password: auth[1],
 };
@@ -30,11 +30,13 @@ client.on('connect', () => {
     client.publish('outdoor/sensors/bme280_getState', '1')
 });
 
-var tempOld = "0";
-var humOld = "0";
-var pressOld = "0";
-var altOld = "0";
+var tempOld;
+var humOld;
+var pressOld;
+var altOld;
+var oldTime = new Date();
 
+//data came synchro
 function pushData(dir, message) {
     var time = new Date();
 
@@ -43,11 +45,36 @@ function pushData(dir, message) {
     if (dir == "press") pressOld = message;
     if (dir == "alt") altOld = message;
 
-    data.temp.push({ x: time, y: tempOld });
-    data.hum.push({ x: time, y: humOld });
-    data.press.push({ x: time, y: pressOld });
-    data.alt.push({ x: time, y: altOld });
+    if (time - oldTime > 500) {
+        oldTime = time;
+        data.temp.push({ x: time, y: tempOld });
+        data.hum.push({ x: time, y: humOld });
+        data.press.push({ x: time, y: pressOld });
+        data.alt.push({ x: time, y: altOld });
+    }
 }
+
+//data came separate
+/*function pushData(dir, message) {
+    var time = new Date();
+
+    if (dir == "temp") {
+        tempOld = { x: time, y: message };
+        data.temp.push(tempOld);
+    }
+    if (dir == "hum") {
+        humOld = { x: time, y: message };
+        data.hum.push(humOld);
+    }
+    if (dir == "press") {
+        pressOld = { x: time, y: message };
+        data.press.push(pressOld);
+    }
+    if (dir == "alt") {
+        altOld = { x: time, y: message };
+        data.alt.push(altOld);
+    }
+}*/
 
 client.on('message', (topic, message) => {
     switch (topic) {
