@@ -30,10 +30,10 @@ client.on('connect', () => {
     client.publish('outdoor/sensors/bme280_getState', '1')
 });
 
-var tempOld;
-var humOld;
-var pressOld;
-var altOld;
+var tempOld = 0;
+var humOld = 0;;
+var pressOld = 0;;
+var altOld = 0;;
 var oldTime = new Date();
 
 //data came synchro
