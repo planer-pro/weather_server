@@ -20,7 +20,7 @@ export default {
   },
   mounted() {
     this.getHistory();
-    setInterval(this.getHistory, 300000);//5min request
+    setInterval(this.getHistory, 4000);
   },
   methods: {
     getHistory() {
@@ -30,25 +30,25 @@ export default {
             {
               label: "Temp",
               fill: false,
-              borderColor: '#EF5350',
+              borderColor: "#EF5350",
               data: res.data.temp
             },
             {
               label: "Hum",
               fill: false,
-              borderColor: '#536DFE',
+              borderColor: "#536DFE",
               data: res.data.hum
             },
             {
               label: "Press",
               fill: false,
-              borderColor: '#A5D6A7',
+              borderColor: "#A5D6A7",
               data: res.data.press
             },
             {
               label: "Alt",
               fill: false,
-              borderColor: '#FFF59D',
+              borderColor: "#FFF59D",
               data: res.data.alt
             }
           ]
