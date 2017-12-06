@@ -41,9 +41,11 @@ app.get('/api/meteo', function (req, res) {
 });
 
 //wakeup server every 20 min
-setInterval(function () {
-  http.get("https://mysoft.herokuapp.com/");
-}, 1200000); // every 20 minutes
+if (process.env.NODE_ENV == "production") {
+  setInterval(function () {
+    http.get("https://mysoft.herokuapp.com/");
+  }, 1200000); // every 20 minutes
+}
 
 app.listen(process.env.PORT || 3000, function () {
   console.log('Adress:localhost:3000');

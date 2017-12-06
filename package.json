@@ -22,9 +22,7 @@
   "dependencies": {
     "express": "^4.15.3",
     "http": "0.0.0",
-    "mqtt": "^2.9.0",
-    "webpack-dev-middleware": "^1.12.1",
-    "webpack-hot-middleware": "^2.20.0"
+    "mqtt": "^2.9.0"
   },
   "devDependencies": {
     "axios": "^0.17.1",
@@ -48,6 +46,8 @@
     "vue-socket.io": "^2.1.1-a",
     "vue-template-compiler": "^2.4.4",
     "webpack": "^3.8.1",
-    "webpack-dev-server": "^2.9.4"
+    "webpack-dev-server": "^2.9.4",
+    "webpack-dev-middleware": "^1.12.1",
+    "webpack-hot-middleware": "^2.20.0"
   }
 }
