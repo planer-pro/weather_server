@@ -3,6 +3,8 @@ var http = require("http");
 var app = express();
 var mqtt = require('./mqtt-client');
 
+var runWakeup = false;
+
 //webpack live reload
 if (process.env.NODE_ENV != "production") {
   var webpack = require('webpack');
@@ -17,6 +19,8 @@ if (process.env.NODE_ENV != "production") {
     path: '/__webpack_hmr',
     heartbeat: 10 * 1000
   }));
+} else {
+  runWakeup = true;
 }
 //------------
 
@@ -41,7 +45,7 @@ app.get('/api/meteo', function (req, res) {
 });
 
 //wakeup server every 20 min
-if (process.env.NODE_ENV == "production") {
+if (runWakeup) {
   setInterval(function () {
     http.get("https://mysoft.herokuapp.com/");
   }, 1200000); // every 20 minutes
