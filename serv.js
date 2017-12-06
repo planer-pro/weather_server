@@ -4,18 +4,20 @@ var app = express();
 var mqtt = require('./mqtt-client');
 
 //webpack live reload
-var webpack = require('webpack');
-var webpackConfig = require('./webpack.config');
-var compiler = webpack(webpackConfig);
-app.use(require("webpack-dev-middleware")(compiler, {
-  noInfo: true,
-  publicPath: webpackConfig.output.publicPath
-}));
-app.use(require("webpack-hot-middleware")(compiler, {
-  log: console.log,
-  path: '/__webpack_hmr',
-  heartbeat: 10 * 1000
-}));
+if (process.env.NODE_ENV != "production") {
+  var webpack = require('webpack');
+  var webpackConfig = require('./webpack.config');
+  var compiler = webpack(webpackConfig);
+  app.use(require("webpack-dev-middleware")(compiler, {
+    noInfo: true,
+    publicPath: webpackConfig.output.publicPath
+  }));
+  app.use(require("webpack-hot-middleware")(compiler, {
+    log: console.log,
+    path: '/__webpack_hmr',
+    heartbeat: 10 * 1000
+  }));
+}
 //------------
 
 app.use(express.static('public'));
