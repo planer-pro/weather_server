@@ -48,7 +48,7 @@ app.get('/api/meteo', function (req, res) {
 if (runWakeup) {
   setInterval(function () {
     http.get("https://mysoft.herokuapp.com/");
-  }, 1200000); // every 20 minutes
+  }, 1140000); // every 19 minutes
 }
 
 app.listen(process.env.PORT || 3000, function () {
