@@ -45,7 +45,7 @@ function pushData(dir, message) {
     if (dir == "press") pressOld = message;
     if (dir == "alt") altOld = message;
 
-    if (time - oldTime > 1000) {
+    if (time - oldTime >= 600000) {//data push one of 10 min
         oldTime = time;
         data.temp.push({ x: time, y: tempOld });
         data.hum.push({ x: time, y: humOld });
